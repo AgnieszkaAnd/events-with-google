@@ -9,7 +9,7 @@ namespace GoogleCalendarTestApp
     {
         IEnumerable<Event> GetEvents();
 
-        Event GetEventByName();
+        Event GetEventByDateTime(DateTime start, DateTime end);
 
         bool AddEvent();
 

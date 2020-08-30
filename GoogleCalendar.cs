@@ -1,6 +1,7 @@
 ﻿using Google.Apis.Calendar.v3.Data;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Calendar.v3;
@@ -28,9 +29,19 @@ namespace GoogleCalendarTestApp
             throw new NotImplementedException();
         }
 
-        public Event GetEventByName()
+        public Event GetEventByDateTime(DateTime start, DateTime end)
         {
-            throw new NotImplementedException();
+            EventsResource.ListRequest request = calendarService.Events.List("primary");
+            request.TimeMin = start;
+            request.ShowDeleted = false;
+            request.SingleEvents = true;
+            request.MaxResults = 1;
+            Event eventResult = request.Execute().Items.FirstOrDefault();
+
+            // DEBUG
+            //Console.WriteLine($"{eventResult.Summary}\n {eventResult.Location}\n {eventResult.Start.DateTime}");
+
+            return eventResult.End.DateTime <= end ? eventResult : null;
         }
 
         public IEnumerable<Event> GetEvents()
@@ -69,6 +80,21 @@ namespace GoogleCalendarTestApp
         public bool UpdateEvent()
         {
             throw new NotImplementedException();
+        }
+
+        // --------------------------------------------------------
+        public IList<CalendarListEntry> GetAllUserCalendars()
+        {
+            var userCalendars = calendarService.CalendarList.List().Execute();
+            
+            // DEBUG
+            //Console.WriteLine("User's available calendars are:");
+            //foreach (var calendar in userCalendars.Items) 
+            //{
+            //    Console.WriteLine($"{calendar.Summary}");
+            //}
+
+            return userCalendars.Items;
         }
     }
 }

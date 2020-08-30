@@ -29,7 +29,11 @@ namespace CalendarQuickstart {
             // Run some code
             var apiConnection = container.Resolve<IGoogleAPIconnection>();
             var googleCalendar = new GoogleCalendar(apiConnection, "Google Calendar API .NET Quickstart");
-            googleCalendar.GetEvents();
+            
+            // DEBUG
+            //googleCalendar.GetEvents();
+            //googleCalendar.GetAllUserCalendars();
+            googleCalendar.GetEventByDateTime(DateTime.UtcNow, DateTime.UtcNow+TimeSpan.FromDays(7));
 
         }
     }
