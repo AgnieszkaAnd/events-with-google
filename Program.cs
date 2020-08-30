@@ -29,12 +29,18 @@ namespace CalendarQuickstart {
             // Run some code
             var apiConnection = container.Resolve<IGoogleAPIconnection>();
             var googleCalendar = new GoogleCalendar(apiConnection, "Google Calendar API .NET Quickstart");
-            
+
             // DEBUG
             //googleCalendar.GetEvents();
             //googleCalendar.GetAllUserCalendars();
-            googleCalendar.GetEventByDateTime(DateTime.UtcNow, DateTime.UtcNow+TimeSpan.FromDays(7));
-
+            //googleCalendar.GetEventByDateTime(DateTime.UtcNow, DateTime.UtcNow+TimeSpan.FromDays(7));
+            //googleCalendar.AddEvent("Sprzatanie",
+            //                        "Home",
+            //                        "Code a lot in .NET",
+            //                        DateTime.UtcNow.AddDays(1).AddHours(14),
+            //                        DateTime.UtcNow.AddDays(1).AddHours(16),
+            //                        "Europe/Warsaw",
+            //                        true);
         }
     }
 }

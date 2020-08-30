@@ -11,7 +11,15 @@ namespace GoogleCalendarTestApp
 
         Event GetEventByDateTime(DateTime start, DateTime end);
 
-        bool AddEvent();
+        void AddEvent(  string summary,
+                        string location,
+                        string description,
+                        DateTime eventStartDateTime,
+                        DateTime eventEndDateTime,
+                        string timezone,
+                        bool isRecurringEvent = false,
+                        string recurringFrequency = "",
+                        int nbOfRecurringEvents = 0);
 
         bool UpdateEvent();
 

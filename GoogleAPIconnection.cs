@@ -26,7 +26,7 @@ namespace GoogleCalendarTestApp
 
         public UserCredential GetToken()
         {
-            string[] Scopes = { CalendarService.Scope.CalendarReadonly };
+            string[] Scopes = { CalendarService.Scope.Calendar };
 
             UserCredential credential;
 
@@ -37,7 +37,7 @@ namespace GoogleCalendarTestApp
             credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
                 GoogleClientSecrets.Load(stream).Secrets,
                 Scopes,
-                "user",
+                "testaspnetgooglapi@gmail.com",
                 CancellationToken.None,
                 new FileDataStore(credPath, true)).Result;
             Console.WriteLine("Credential file saved to: " + credPath);

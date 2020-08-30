@@ -19,9 +19,56 @@ namespace GoogleCalendarTestApp
             calendarService = googleAPIconnection.CreateCalendarService(token, appName);
         }
 
-        public bool AddEvent()
+        public void AddEvent(   string summary,
+                                string location,
+                                string description,
+                                DateTime eventStartDateTime,
+                                DateTime eventEndDateTime,
+                                string timezone,
+                                bool isRecurringEvent=false,
+                                string recurringFrequency="",
+                                int nbOfRecurringEvents=0)
         {
-            throw new NotImplementedException();
+            Event newEvent = new Event()
+            {
+                Summary = summary,
+                Location = location,
+                Description = description
+            };
+
+            DateTime startDateTime = eventStartDateTime;
+            EventDateTime start = new EventDateTime()
+            {
+                DateTime = startDateTime,
+                TimeZone = timezone
+            };
+            newEvent.Start = start;
+
+            DateTime endDateTime = eventEndDateTime;
+            EventDateTime end = new EventDateTime()
+            {
+                DateTime = endDateTime,
+                TimeZone = timezone
+            };
+            newEvent.End = end;
+
+            if (isRecurringEvent)
+            {
+                String[] recurrence = new String[] { "RRULE:FREQ=DAILY;COUNT=7" };
+                newEvent.Recurrence = recurrence.ToList();
+            }
+
+            // FOR FUTURE - ADD ATTENDEES
+            //EventAttendee[] attendees = new EventAttendee[]
+            //{
+            //    new EventAttendee() { Email = "<---email-address--->@gmail.com" },
+            //};
+            //newEvent.Attendees = attendees.ToList();
+
+            String calendarId = "primary";
+
+            var createdEvent = calendarService.Events.Insert(newEvent, calendarId).Execute();
+            Console.WriteLine($"Event created {createdEvent.HtmlLink}");
         }
 
         public bool DeleteEvent()
@@ -86,12 +133,14 @@ namespace GoogleCalendarTestApp
         public IList<CalendarListEntry> GetAllUserCalendars()
         {
             var userCalendars = calendarService.CalendarList.List().Execute();
-            
+
             // DEBUG
             //Console.WriteLine("User's available calendars are:");
-            //foreach (var calendar in userCalendars.Items) 
+            //foreach (var calendar in userCalendars.Items)
             //{
+            //    Console.WriteLine($"{calendar.Id}");
             //    Console.WriteLine($"{calendar.Summary}");
+            //    Console.WriteLine($"Access role: {calendar.AccessRole}");
             //}
 
             return userCalendars.Items;
