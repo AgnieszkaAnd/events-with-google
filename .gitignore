@@ -1,0 +1,8 @@
+v16/
+.vs/
+
+obj/
+bin/
+
+.csproj.user
+credentials.json
