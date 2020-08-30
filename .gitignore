@@ -4,5 +4,5 @@ v16/
 obj/
 bin/
 
-.csproj.user
+.user
 credentials.json
