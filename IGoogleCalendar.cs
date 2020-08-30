@@ -21,8 +21,8 @@ namespace GoogleCalendarTestApp
                         string recurringFrequency = "",
                         int nbOfRecurringEvents = 0);
 
-        bool UpdateEvent();
+        void UpdateEvent(string eventId, Event eventToUpdate);
 
-        bool DeleteEvent();
+        void DeleteEvent(string eventId);
     }
 }

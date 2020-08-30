@@ -71,9 +71,19 @@ namespace GoogleCalendarTestApp
             Console.WriteLine($"Event created {createdEvent.HtmlLink}");
         }
 
-        public bool DeleteEvent()
+        /// <summary>
+        /// Delete Google Calendar event by Id:
+        /// assuming user using the code will click in the web app on Event
+        /// and will retrieve eventId from that
+        /// </summary>
+        /// <param name="eventId"></param>
+        /// <returns></returns>
+        public void DeleteEvent(string eventId)
         {
-            throw new NotImplementedException();
+            String calendarId = "primary";
+
+            var createdEvent = calendarService.Events.Delete(calendarId, eventId).Execute();
+            Console.WriteLine($"Event deleted {eventId}");
         }
 
         public Event GetEventByDateTime(DateTime start, DateTime end)
@@ -124,9 +134,12 @@ namespace GoogleCalendarTestApp
             return events.Items;
         }
 
-        public bool UpdateEvent()
+        public void UpdateEvent(string eventId, Event eventToUpdate)
         {
-            throw new NotImplementedException();
+            String calendarId = "primary";
+
+            var createdEvent = calendarService.Events.Update(eventToUpdate, calendarId, eventId).Execute();
+            Console.WriteLine($"Event updated {eventId}");
         }
 
         // --------------------------------------------------------

@@ -41,6 +41,28 @@ namespace CalendarQuickstart {
             //                        DateTime.UtcNow.AddDays(1).AddHours(16),
             //                        "Europe/Warsaw",
             //                        true);
+
+            //var eventToUpdate = googleCalendar.GetEventByDateTime(DateTime.UtcNow.AddDays(5), DateTime.UtcNow.AddDays(7));
+            //googleCalendar.UpdateEvent(eventToUpdate.Id, new Event()
+            //{
+            //    Summary = "Updated Summary",
+            //    Location = "Home",
+            //    Description = "some description",
+
+            //    Start = new EventDateTime()
+            //    {
+            //        DateTime = DateTime.UtcNow.AddDays(1).AddHours(16),
+            //        TimeZone = "Europe/Warsaw"
+            //    },
+            //    End = new EventDateTime()
+            //    {
+            //        DateTime = DateTime.UtcNow.AddDays(1).AddHours(17),
+            //        TimeZone = "Europe/Warsaw"
+            //    },
+            //});
+
+            //var eventToDelete = googleCalendar.GetEventByDateTime(DateTime.UtcNow.AddDays(6), DateTime.UtcNow.AddDays(7));
+            //googleCalendar.DeleteEvent(eventToDelete.Id);
         }
     }
 }
