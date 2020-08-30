@@ -11,13 +11,23 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using GoogleCalendarTestApp;
+using Autofac;
+using Google.Apis.Logging;
+
 
 namespace CalendarQuickstart {
     class Program {
 
         static void Main(string[] args) {
 
-            IGoogleAPIconnection apiConnection = new GoogleAPIconnection();
+            // Set up IoC container
+            var builder = new ContainerBuilder();
+            builder.RegisterInstance(new GoogleAPIconnection())
+                                        .As<IGoogleAPIconnection>();
+            var container = builder.Build();
+
+            // Run some code
+            var apiConnection = container.Resolve<IGoogleAPIconnection>();
             var googleCalendar = new GoogleCalendar(apiConnection, "Google Calendar API .NET Quickstart");
             googleCalendar.GetEvents();
 
